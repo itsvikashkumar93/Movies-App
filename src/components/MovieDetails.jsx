@@ -1,0 +1,179 @@
+import React, { useEffect } from "react";
+import { asyncloadMovie } from "../store/actions/movieActions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
+import { removeMovie } from "../store/reducers/movieSlice";
+import HorizontalCards from "./Partials/HorizontalCards";
+import Loading from "./Loading";
+
+const MovieDetails = () => {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const { info } = useSelector((state) => state.movie);
+  // console.log(info);
+
+  useEffect(() => {
+    dispatch(asyncloadMovie(id));
+    return () => {
+      dispatch(removeMovie());
+    };
+  }, [id]);
+  return info ? (
+    <div
+      className="relative w-screen h-screen text-zinc-300 p-10 px-28 overflow-y-auto"
+      style={{
+        background: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),url(https://image.tmdb.org/t/p/original${
+          info.detail.backdrop_path || info.detail.poster_path
+        })`,
+        backgroundPosition: "top 10%",
+        backgroundSize: "cover",
+      }}
+    >
+      {/* Part-1 Navbar */}
+      <nav className="flex gap-5 items-center">
+        <i
+          className="ri-arrow-left-line text-xl hover:text-[#6556CD] cursor-pointer"
+          onClick={() => navigate(-1)}
+        ></i>
+
+        <a target="_blank" href={info.detail.homepage}>
+          <i className="ri-external-link-line text-xl hover:text-[#6556CD]"></i>
+        </a>
+        <a
+          target="_blank"
+          href={`https://www.wikidata.org/wiki/${info.externalId.wikidata_id}`}
+        >
+          <i className="ri-earth-line text-xl hover:text-[#6556CD]"></i>
+        </a>
+        <a
+          target="_blank"
+          href={`https://www.imdb.com/title/${info.externalId.imdb_id}/`}
+        >
+          <img
+            className="w-9"
+            src="https://imgs.search.brave.com/x2y7SrQuxPQSrFV8_igskF1Kn1csh76uqD3vSCLwiGE/rs:fit:500:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy90/aHVtYi82LzY5L0lN/REJfTG9nb18yMDE2/LnN2Zy8yMjBweC1J/TURCX0xvZ29fMjAx/Ni5zdmcucG5n"
+            alt=""
+          />
+        </a>
+      </nav>
+
+      {/* Part-2 Poster and details */}
+      <div className="w-full mt-8 flex gap-10">
+        <img
+          src={`https://image.tmdb.org/t/p/original${
+            info.detail.poster_path || info.detail.backdrop_path
+          }`}
+          alt=""
+          className="h-[54vh] shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] object-cover rounded"
+        />
+
+        <div className="w-full text-zinc-100">
+          <h1 className="text-6xl font-bold">
+            {info.detail.title || info.detail.original_title}
+            <span className="text-3xl text-zinc-300">
+              ({info.detail.release_date.split("-")[0]})
+            </span>
+          </h1>
+          <div className="w-full mt-3 flex gap-4 items-center ">
+            {info.detail.vote_average && (
+              <span className="text-lg bg-yellow-600 flex items-center font-semibold justify-center inline-block h-[7vh] w-[7vh] rounded-full  ">
+                {(info.detail.vote_average * 10).toFixed()}
+                <sup>%</sup>
+              </span>
+            )}
+            <h1 className="text-2xl w-14 leading-none">User Score</h1>
+            <h1 className="text-lg">{info.detail.release_date}</h1>
+            <h1 className="text-lg">
+              {info.detail.genres.map((g) => g.name).join(", ")}
+            </h1>
+            <h1 className="text-lg">{info.detail.runtime}min</h1>
+          </div>
+
+          <h1 className="mt-3 text-2xl italic text-zinc-200 font-semibold">
+            {info.detail.tagline}
+          </h1>
+          <h1 className="mt-1 text-3xl font-semibold">Overview</h1>
+          <p>{info.detail.overview}</p>
+          <h1 className="mt-1 text-3xl font-semibold">Translated in</h1>
+          <p>{info.translations.join(", ")}</p>
+          <Link
+            to={`${pathname}/trailer`}
+            className="px-3 py-2 bg-red-600 rounded-md inline-block mt-2 text-white"
+          >
+            <i className="ri-play-mini-fill"></i>Watch Trailer
+          </Link>
+        </div>
+      </div>
+
+      {/* Part-3 Available on Platforms */}
+      <div className="flex flex-col gap-5 mt-5">
+        {info.watchProviders && info.watchProviders.flatrate && (
+          <div className="flex gap-4 items-center">
+            <h1 className="text-lg">Available on Platforms</h1>
+            {info.watchProviders.flatrate.map((w, i) => (
+              <img
+                title={w.provider_name}
+                className="w-[5vh] h-[5vh] object-cover rounded-md"
+                key={i}
+                src={`https://image.tmdb.org/t/p/original${w.logo_path}`}
+              />
+            ))}
+          </div>
+        )}
+
+        {info.watchProviders && info.watchProviders.rent && (
+          <div className="flex gap-4 items-center">
+            <h1 className="text-lg">Available on Rent</h1>
+            {info.watchProviders.rent.map((w, i) => (
+              <img
+                title={w.provider_name}
+                className="w-[5vh] h-[5vh] object-cover rounded-md"
+                key={i}
+                src={`https://image.tmdb.org/t/p/original${w.logo_path}`}
+              />
+            ))}
+          </div>
+        )}
+        {info.watchProviders && info.watchProviders.buy && (
+          <div className="flex gap-4 items-center">
+            <h1 className="text-lg">Available to Buy</h1>
+            {info.watchProviders.buy.map((w, i) => (
+              <img
+                title={w.provider_name}
+                className="w-[5vh] h-[5vh] object-cover rounded-md"
+                key={i}
+                src={`https://image.tmdb.org/t/p/original${w.logo_path}`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Part-4 Recommendations and Similar stuff */}
+      <div className="mt-10">
+        <h1 className="mb-5 pt-2 text-3xl font-semibold border-t-[0.1vh] bordewr-zinc-500">
+          Recommendations and Similar
+        </h1>
+
+        <HorizontalCards
+          data={info.recommendations ? info.recommendations : info.similar}
+        />
+      </div>
+
+      <Outlet />
+    </div>
+  ) : (
+    <Loading />
+  );
+};
+
+export default MovieDetails;
