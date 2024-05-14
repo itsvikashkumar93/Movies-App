@@ -27,7 +27,7 @@ const Cards = ({ data, title }) => {
           <h1 className="p-2 text-xl font-semibold hover:text-red-500">
             {elem.title || elem.name}
           </h1>
-          {elem.vote_average && (
+          {elem.vote_average * 10 > 0 && (
             <span className="absolute bottom-[35%] -right-[10%] font-semibold text-lg bg-yellow-600 flex items-center justify-center inline-block h-[7vh] w-[7vh] rounded-full  ">
               {(elem.vote_average * 10).toFixed()}
               <sup>%</sup>
