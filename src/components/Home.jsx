@@ -55,20 +55,22 @@ function Home() {
         <SideNav />
       </div>
       <div className="h-full w-full sm:w-[80%] overflow-y-auto">
-        <div className="searchBox relative w-full flex items-center justify-end sm:justify-center py-5 px-3 sm:px-10 ">
+        <div className="searchBox relative w-full sm:flex sm:items-center sm:justify-center py-5 px-3 sm:px-10 ">
           <div
             onClick={() => handleSidebar()}
-            className="text-white absolute left-3 z-[999] text-2xl sm:hidden"
+            className="text-white flex items-center justify-between text-xl sm:hidden py-2 mt-4 bg-zinc-800 px-3 rounded"
           >
+            <h1 className="text-zinc-300">Menu</h1>
             {sidebarOpen ? (
-              <i className="ri-menu-2-line"></i>
+              <i className="ri-menu-2-line text-zinc-200"></i>
             ) : (
-              <i className="ri-close-large-line"></i>
+              <i className="ri-close-large-line text-zinc-200"></i>
             )}
           </div>
-
-          <div className="w-[90%] sm:w-[50%] ">
-            <Search />
+          <div className="flex justify-center">
+            <div className="w-[100%] pt-4 sm:w-[50%] ">
+              <Search />
+            </div>
           </div>
         </div>
         <div className="px-2 sm:px-0 ">
