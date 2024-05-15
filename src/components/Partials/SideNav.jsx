@@ -14,7 +14,7 @@ function SideNav() {
     { icon: "ri-phone-fill", title: "Contact Us" },
   ];
   return (
-    <div className="h-screen w-[100%]  border-r-[0.1vw] border-zinc-500 py-8 px-5 bg-[#1F1E24]">
+    <div className="h-screen w-[100%] overflow-hidden border-r-[0.1vw] border-zinc-500 py-8 px-5 bg-[#1F1E24]">
       <h1 className="mt-10 sm:mt-0 text-white text-3xl sm:text-2xl font-bold ">
         <i className="text-[#6556CD] ri-tv-fill mr-2"></i>
         <span>SCSDB</span>

@@ -55,7 +55,7 @@ function Home() {
         <SideNav />
       </div>
       <div className="h-full w-full sm:w-[80%] overflow-y-auto">
-        <div className="searchBox w-full flex items-center justify-end sm:justify-center py-5 px-3 sm:px-10 ">
+        <div className="searchBox relative w-full flex items-center justify-end sm:justify-center py-5 px-3 sm:px-10 ">
           <div
             onClick={() => handleSidebar()}
             className="text-white absolute left-3 z-[999] text-2xl sm:hidden"
