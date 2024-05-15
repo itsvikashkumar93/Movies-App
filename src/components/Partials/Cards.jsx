@@ -28,7 +28,7 @@ const Cards = ({ data, title }) => {
             {elem.title || elem.name}
           </h1>
           {elem.vote_average * 10 > 0 && (
-            <span className="absolute bottom-[28%] right-[0] sm:bottom-[35%] sm:-right-[10%] font-semibold sm:text-lg bg-yellow-600 flex items-center justify-center inline-block h-[6vh] w-[6vh] sm:h-[7vh] sm:w-[7vh] rounded-full  ">
+            <span className="absolute bottom-[17%] right-[0] sm:bottom-[35%] sm:-right-[10%] font-semibold sm:text-lg bg-yellow-600 flex items-center justify-center inline-block h-[6vh] w-[6vh] sm:h-[7vh] sm:w-[7vh] rounded-full  ">
               {(elem.vote_average * 10).toFixed()}
               <sup>%</sup>
             </span>
