@@ -43,17 +43,21 @@ function Home() {
   }, [category]);
 
   return wallpaper && trending ? (
-    <div className="h-full w-full flex">
-      <SideNav />
-      <div className="h-full w-[80%] overflow-y-auto">
+    <div className="h-screen w-full sm:flex relative ">
+      <div className="sm:w-[20%] absolute sm:relative">{/* <SideNav /> */}</div>
+      <div className="h-full sm:w-[80%] overflow-y-auto">
         <div className="searchBox w-full flex items-center justify-center py-5 px-10 ">
-          <Search width={40} />
+          <div className="w-full sm:w-[50%] ">
+            <Search />
+          </div>
         </div>
-        <Header data={wallpaper} />
+        <div className="px-2 sm:px-0 ">
+          <Header data={wallpaper} />
+        </div>
 
         <div className=" w-full py-5">
-          <div className="w-full flex justify-between px-5">
-            <h1 className="text-5xl mb-10 font-semibold text-zinc-400">
+          <div className="w-full flex justify-between px-2 sm:px-5">
+            <h1 className="text-3xl sm:text-5xl mb-10 font-semibold text-zinc-400">
               Trending
             </h1>
             <Dropdown

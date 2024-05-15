@@ -30,7 +30,7 @@ const Trending = () => {
       } else {
         setHasMore(false);
       }
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -40,7 +40,7 @@ const Trending = () => {
     if (trending.length === 0) {
       getTrending();
     } else {
-      console.log(page);
+      // console.log(page);
       setPage(1);
       setTrending([]);
       getTrending();
@@ -53,27 +53,31 @@ const Trending = () => {
 
   return trending.length > 0 ? (
     <div className="w-full h-screen text-white ">
-      <div className="navbar px-10 py-6 w-full flex items-center justify-between">
+      <div className="navbar px-1 py-5 sm:px-10 sm:py-6 w-full flex items-center justify-between">
         <div className="w-[10%] flex items-center gap-2">
           <i
             className="ri-arrow-left-line text-xl hover:text-[#6556CD] cursor-pointer"
             onClick={() => navigate(-1)}
           ></i>
-          <h1 className="text-3xl font-semibold leading-none">Trending</h1>
+          <h1 className="text-2xl sm:text-3xl font-semibold leading-none">Trending</h1>
         </div>
-        <div className="w-[75%] flex items-center justify-between">
-          <Search width={32} />
+        <div className="w-[75%] flex items-center justify-end sm:justify-between">
+          <div className="w-[50%] hidden sm:block">
+            <Search />
+          </div>
           <div className="flex gap-3">
             <Dropdown
               title={"Category"}
               options={["tv", "movie", "all"]}
               func={(e) => setCategory(e.target.value)}
             />
-            <Dropdown
-              title={"Duration"}
-              options={["day", "week"]}
-              func={(e) => setDuration(e.target.value)}
-            />
+            <div className="hidden sm:block">
+              <Dropdown
+                title={"Duration"}
+                options={["day", "week"]}
+                func={(e) => setDuration(e.target.value)}
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -5,14 +5,14 @@ function HorizontalCards({ data, p = 0 }) {
   return (
     <div
       style={{ padding: `0 ${p}vw` }}
-      className="w-full text-white flex gap-5 overflow-x-auto overflow-y-hidden"
+      className="w-full text-white flex gap-2 sm:gap-5 overflow-x-auto overflow-y-hidden"
     >
       {data.length > 0 ? (
         data.map((elem, i) => (
           <Link
             to={`/${elem.media_type}/details/${elem.id}`}
             key={i}
-            className="h-[42vh] w-[15vw] bg-zinc-700 shrink-0 rounded overflow-y-auto"
+            className="h-[45vh] w-[60vw] sm:h-[42vh] sm:w-[15vw] bg-zinc-700 shrink-0 rounded overflow-y-hidden sm:overflow-y-auto"
           >
             <img
               src={
@@ -27,7 +27,7 @@ function HorizontalCards({ data, p = 0 }) {
             />
 
             <div className="w-full py-3 px-2">
-              <h1 className=" text-xl leading-[1.6vw] font-semibold">
+              <h1 className="text-xl leading-none sm:leading-[1.6vw] font-semibold">
                 {elem.title || elem.name}
               </h1>
               <p className="mt-1 text-sm text-zinc-200">

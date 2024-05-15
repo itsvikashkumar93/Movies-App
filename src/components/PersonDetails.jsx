@@ -15,7 +15,7 @@ const PersonDetails = () => {
   const dispatch = useDispatch();
 
   const { info } = useSelector((state) => state.person);
-  console.log(info);
+  // console.log(info);
 
   useEffect(() => {
     dispatch(asyncloadPerson(id));
@@ -24,9 +24,9 @@ const PersonDetails = () => {
     };
   }, [id]);
   return info ? (
-    <div className="relative w-full h-screen overflow-y-auto text-zinc-300 p-10 px-28 ">
+    <div className="relative w-full h-screen text-zinc-100 pt-5 px-1 sm:p-10 sm:px-28 overflow-y-auto ">
       {/* Part-1 Navbar */}
-      <nav className="flex gap-5 items-center">
+      <nav className="w-full flex gap-5 items-center">
         <i
           className="ri-arrow-left-line text-xl hover:text-[#6556CD] cursor-pointer"
           onClick={() => navigate(-1)}
@@ -34,17 +34,21 @@ const PersonDetails = () => {
       </nav>
 
       {/* Part-2 Poster and details */}
-      <div className="w-full mt-5 flex justify-between">
-        <div className="w-[25%]">
+      <div className="w-full mt-4 sm:mt-8 flex flex-col justify-center sm:flex-row sm:items-start sm:justify-start gap-6 sm:gap-10 px-2 sm:px-0">
+        <div className="sm:w-[25%] w-full sm:px-2 flex justify-center flex-col items-center">
           <img
-            src={info.detail.poster_path || info.detail.profile_path?`https://image.tmdb.org/t/p/original${
+            src={
               info.detail.poster_path || info.detail.profile_path
-            }`: noimage}
+                ? `https://image.tmdb.org/t/p/original${
+                    info.detail.poster_path || info.detail.profile_path
+                  }`
+                : noimage
+            }
             alt=""
-            className="h-[50vh] w-[80%] shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] object-cover rounded"
+            className="h-[65vh] sm:h-[55vh] shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] object-cover rounded"
           />
           {/* Part-3 Personal Details */}
-          <div className="w-full text-zinc-100">
+          <div className="w-full mt-3 sm:mt-0 text-zinc-100 ">
             {/* Profile Links */}
             <div className="flex gap-3 text-2xl items-center my-1">
               {info.externalId.instagram_id && (
@@ -125,8 +129,8 @@ const PersonDetails = () => {
             )}
           </div>
         </div>
-        <div className="text-zinc-200 w-[75%]">
-          <h1 className="text-6xl text-zinc-400 font-bold">
+        <div className="text-zinc-200 sm:w-[75%]">
+          <h1 className="text-5xl sm:text-6xl text-zinc-100 font-bold">
             {info.detail.name}
           </h1>
           <h1 className="text-3xl font-semibold mt-3">Biography</h1>
@@ -148,7 +152,7 @@ const PersonDetails = () => {
                 func={(e) => setCategory(e.target.value)}
               />
             </div>
-            
+
             <div className="p-2 w-full flex flex-col gap-2 shadow-[2px_2px_12px_-4px_#5E4EC7] border-[0.2vh] max-h-[40vh] overflow-y-auto border-zinc-600 mt-5 rounded-md">
               {info[category + "Credits"].cast.map((c, i) => (
                 <Link

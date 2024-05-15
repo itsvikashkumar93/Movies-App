@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { asyncloadMovie } from "../store/actions/movieActions";
 import { useDispatch, useSelector } from "react-redux";
+import noimage from "/noimage.webp";
 import {
   Link,
   Outlet,
@@ -29,17 +30,17 @@ const MovieDetails = () => {
   }, [id]);
   return info ? (
     <div
-      className="relative w-screen h-screen text-zinc-300 p-10 px-28 overflow-y-auto"
+      className="relative w-full h-screen text-zinc-100 pt-5 px-1 sm:p-10 sm:px-28 overflow-y-auto"
       style={{
         background: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),url(https://image.tmdb.org/t/p/original${
           info.detail.backdrop_path || info.detail.poster_path
         })`,
-        backgroundPosition: "top 10%",
+        backgroundPosition: "center top",
         backgroundSize: "cover",
       }}
     >
       {/* Part-1 Navbar */}
-      <nav className="flex gap-5 items-center">
+      <nav className="w-full flex gap-5 items-center">
         <i
           className="ri-arrow-left-line text-xl hover:text-[#6556CD] cursor-pointer"
           onClick={() => navigate(-1)}
@@ -67,38 +68,40 @@ const MovieDetails = () => {
       </nav>
 
       {/* Part-2 Poster and details */}
-      <div className="w-full mt-8 flex gap-10">
+      <div className="w-full mt-6 sm:mt-8 flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start gap-6 sm:gap-10">
         <img
-          src={`https://image.tmdb.org/t/p/original${
+          src={ info.detail.poster_path || info.detail.backdrop_path ? `https://image.tmdb.org/t/p/original${
             info.detail.poster_path || info.detail.backdrop_path
-          }`}
+          }`: noimage}
           alt=""
-          className="h-[54vh] shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] object-cover rounded"
+          className="h-[70vh] sm:h-[55vh] sm:w-[20vw] shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] object-cover rounded"
         />
 
-        <div className="w-full text-zinc-100">
-          <h1 className="text-6xl font-bold">
+        <div className="w-full text-zinc-100 px-2 sm:px-0">
+          <h1 className="text-4xl sm:text-6xl font-bold">
             {info.detail.title || info.detail.original_title}
-            <span className="text-3xl text-zinc-300">
+            <span className="text-xl sm:text-3xl text-zinc-200">
               ({info.detail.release_date.split("-")[0]})
             </span>
           </h1>
-          <div className="w-full mt-3 flex gap-4 items-center ">
-            {info.detail.vote_average && (
-              <span className="text-lg bg-yellow-600 flex items-center font-semibold justify-center inline-block h-[7vh] w-[7vh] rounded-full  ">
-                {(info.detail.vote_average * 10).toFixed()}
-                <sup>%</sup>
-              </span>
-            )}
-            <h1 className="text-2xl w-14 leading-none">User Score</h1>
-            <h1 className="text-lg">{info.detail.release_date}</h1>
+          <div className="w-full mt-5 flex  flex-col sm:flex-row gap-4 sm:gap-10 sm:items-center ">
+            <div className="w-full sm:w-fit items-center flex justify-between sm:gap-8 sm:justify-start">
+              {info.detail.vote_average && (
+                <span className="text-lg bg-yellow-600 flex items-center font-semibold justify-center inline-block h-[7vh] w-[7vh] rounded-full">
+                  {(info.detail.vote_average * 10).toFixed()}
+                  <sup>%</sup>
+                </span>
+              )}
+              <h1 className="text-2xl w-14 leading-none">User Score</h1>
+              <h1 className="text-lg">{info.detail.release_date}</h1>
+              <h1 className="text-lg">{info.detail.runtime}min</h1>
+            </div>
             <h1 className="text-lg">
               {info.detail.genres.map((g) => g.name).join(", ")}
             </h1>
-            <h1 className="text-lg">{info.detail.runtime}min</h1>
           </div>
 
-          <h1 className="mt-3 text-2xl italic text-zinc-200 font-semibold">
+          <h1 className="mt-2 sm:mt-3 text-2xl italic text-zinc-200 font-semibold">
             {info.detail.tagline}
           </h1>
           <h1 className="mt-1 text-3xl font-semibold">Overview</h1>
@@ -107,7 +110,7 @@ const MovieDetails = () => {
           <p>{info.translations.join(", ")}</p>
           <Link
             to={`${pathname}/trailer`}
-            className="px-3 py-2 bg-red-600 rounded-md inline-block mt-2 text-white"
+            className="px-3 py-2 bg-red-600 rounded-md inline-block mt-3 text-white"
           >
             <i className="ri-play-mini-fill"></i>Watch Trailer
           </Link>
@@ -115,7 +118,7 @@ const MovieDetails = () => {
       </div>
 
       {/* Part-3 Available on Platforms */}
-      <div className="flex flex-col gap-5 mt-5">
+      <div className="flex flex-col px-2 sm:px-0 gap-5 mt-5">
         {info.watchProviders && info.watchProviders.flatrate && (
           <div className="flex gap-4 items-center">
             <h1 className="text-lg">Available on Platforms</h1>
@@ -160,7 +163,7 @@ const MovieDetails = () => {
 
       {/* Part-4 Recommendations and Similar stuff */}
       <div className="mt-10">
-        <h1 className="mb-5 pt-2 text-3xl font-semibold border-t-[0.1vh] bordewr-zinc-500">
+        <h1 className="mb-5 pt-2 text-3xl font-semibold border-t-[0.1vh] border-zinc-400">
           Recommendations and Similar
         </h1>
 
