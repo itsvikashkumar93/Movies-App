@@ -167,6 +167,7 @@ const PersonDetails = () => {
                 </Link>
               ))}
             </div>
+            <div className="h-5 w-full"></div>
           </div>
         </div>
       </div>

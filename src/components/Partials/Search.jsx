@@ -26,7 +26,7 @@ function Search({ width }) {
 
   return (
     <div className="w-full relative flex items-center justify-center z-[99]">
-      <i className="absolute left-[-12%] sm:left-[-7%] ri-search-line text-white text-xl sm:text-2xl"></i>
+      <i className="absolute left-[-10%] hidden sm:block sm:left-[-7%] ri-search-line text-white text-xl sm:text-2xl"></i>
       <input
         onChange={(e) => setQuery(e.target.value)}
         value={query}
@@ -37,7 +37,7 @@ function Search({ width }) {
       {query.length > 0 && (
         <i
           onClick={() => setQuery("")}
-          className="ri-close-line absolute right-[-12%] sm:right-[-7%] text-white text-xl sm:text-2xl cursor-pointer"
+          className="ri-close-line absolute right-[-10%] sm:right-[-7%] text-white text-xl sm:text-2xl cursor-pointer"
         ></i>
       )}
 

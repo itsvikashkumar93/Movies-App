@@ -13,6 +13,7 @@ function Home() {
   const [wallpaper, setWallpaper] = useState(null);
   const [trending, setTrending] = useState(null);
   const [category, setCategory] = useState("all");
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const getHeaderWallpaper = async () => {
     try {
@@ -37,6 +38,12 @@ function Home() {
     }
   };
 
+  const handleSidebar = () => {
+    document.querySelector(".sidebar").classList.toggle("hidden");
+
+    setSidebarOpen(!sidebarOpen);
+  };
+
   useEffect(() => {
     !wallpaper && getHeaderWallpaper();
     getTrending(); // whenever category changes
@@ -44,10 +51,23 @@ function Home() {
 
   return wallpaper && trending ? (
     <div className="h-screen w-full sm:flex relative ">
-      <div className="sm:w-[20%] absolute sm:relative">{/* <SideNav /> */}</div>
-      <div className="h-full sm:w-[80%] overflow-y-auto">
-        <div className="searchBox w-full flex items-center justify-center py-5 px-10 ">
-          <div className="w-full sm:w-[50%] ">
+      <div className="sidebar sm:w-[20%] absolute z-[999] sm:relative hidden sm:block">
+        <SideNav />
+      </div>
+      <div className="h-full w-full sm:w-[80%] overflow-y-auto">
+        <div className="searchBox w-full flex items-center justify-end sm:justify-center py-5 px-3 sm:px-10 ">
+          <div
+            onClick={() => handleSidebar()}
+            className="text-white absolute left-3 z-[999] text-2xl sm:hidden"
+          >
+            {sidebarOpen ? (
+              <i className="ri-menu-2-line"></i>
+            ) : (
+              <i className="ri-close-large-line"></i>
+            )}
+          </div>
+
+          <div className="w-[90%] sm:w-[50%] ">
             <Search />
           </div>
         </div>
@@ -57,7 +77,7 @@ function Home() {
 
         <div className=" w-full py-5">
           <div className="w-full flex justify-between px-2 sm:px-5">
-            <h1 className="text-3xl sm:text-5xl mb-10 font-semibold text-zinc-400">
+            <h1 className="text-4xl sm:text-5xl mb-10 font-semibold text-zinc-400">
               Trending
             </h1>
             <Dropdown

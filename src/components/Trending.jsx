@@ -53,7 +53,7 @@ const Trending = () => {
 
   return trending.length > 0 ? (
     <div className="w-full h-screen text-white ">
-      <div className="navbar px-1 py-5 sm:px-10 sm:py-6 w-full flex items-center justify-between">
+      <div className="navbar px-2 py-5 sm:px-10 sm:py-6 w-full flex items-center justify-between">
         <div className="w-[10%] flex items-center gap-2">
           <i
             className="ri-arrow-left-line text-xl hover:text-[#6556CD] cursor-pointer"

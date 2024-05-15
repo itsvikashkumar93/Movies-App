@@ -22,7 +22,7 @@ const Cards = ({ data, title }) => {
                 : noimage
             }
             alt=""
-            className="w-full h-[40vh] sm:h-[48vh] object-top sm:object-center object-cover rounded-t"
+            className="w-full h-[35vh] sm:h-[48vh] object-top sm:object-center object-cover rounded-t"
           />
           <h1 className="p-1 h-16 sm:h-[9vh] overflow-hidden sm:p-2 text-lg sm:text-xl font-semibold hover:text-red-500">
             {elem.title || elem.name}

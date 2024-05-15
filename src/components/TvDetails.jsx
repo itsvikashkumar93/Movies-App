@@ -74,7 +74,7 @@ const TvDetails = () => {
             info.detail.poster_path || info.detail.backdrop_path
           }`}
           alt=""
-          className="h-[70vh] sm:h-[55vh] shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] object-cover rounded"
+          className="h-[65vh] sm:h-[55vh] shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] object-cover rounded"
         />
 
         <div className="w-full text-zinc-100 px-2 sm:px-0">
