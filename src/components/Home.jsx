@@ -68,7 +68,7 @@ function Home() {
             )}
           </div>
           <div className="flex justify-center">
-            <div className="w-[100%] pt-4 sm:w-[50%] ">
+            <div className="w-[100%] pt-4 sm:w-full ">
               <Search />
             </div>
           </div>

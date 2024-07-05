@@ -41,7 +41,7 @@ function Search({ width }) {
         ></i>
       )}
 
-      <div className="absolute w-full max-h-[40vh] sm:max-h-[50vh] left-1/2 -translate-x-[50%] text-zinc-100 bg-zinc-800 rounded top-[115%] px-2 sm:px-5 flex flex-col overflow-y-auto">
+      <div className="absolute w-full max-h-[40vh] sm:max-h-[50vh] left-1/2 -translate-x-[50%] text-zinc-100 bg-zinc-800 rounded top-[115%] px-2 sm:px-2 flex flex-col overflow-y-auto">
         {searches.map((s, i) => (
           <Link
             to={`/${s.media_type}/details/${s.id}`}
